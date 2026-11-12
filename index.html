@@ -76,6 +76,10 @@ section p.lead{text-align:center;color:var(--ink2);font-size:14px;margin-bottom:
 .mint-box{background:#fff;border:1px solid #f0e3f5;border-radius:22px;padding:22px 18px;text-align:center;box-shadow:var(--shadow)}
 .mint-box .soon{display:inline-block;background:#f6f0ff;color:var(--purple);font-weight:800;font-size:13px;padding:6px 14px;border-radius:999px;margin-bottom:10px}
 .mint-box .soon.live{background:#e6f7e6;color:#1a7f37}
+.mint-status{font-size:13px;margin-top:10px;min-height:18px;color:var(--ink2)}
+.mint-status.err{color:#c0392b}
+.mint-status.ok{color:#1a7f37}
+.mint-status a{color:var(--purple);font-weight:700}
 .price-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
 .price-table th{background:#f9f3ff;padding:9px 8px;font-size:12px;letter-spacing:.5px;color:var(--ink2)}
 .price-table td{padding:10px 8px;border-top:1px solid #f3e9f7}
@@ -226,6 +230,7 @@ footer .x a{display:inline-block;background:#000;color:#fff;font-weight:700;padd
     </div>
     <p style="font-size:14px"><span data-lkey="totalLabel">总计 / 合計 / Total</span>: <b id="totalPrice">FREE</b></p>
     <button class="mint-btn-big" id="mintBtn" onclick="doMint()" data-lkey="mintBtnBig">铸造 · ミントする / Mint</button>
+    <p class="mint-status" id="mintStatus"></p>
     <p class="mint-note" id="mintNote" data-lkey="mintNote">免费和付费铸造都需要 Agent ID。任何人都可以连接钱包浏览。Free and paid mints both need an Agent ID. Anyone can connect a wallet to browse.</p>
   </div>
 </section>
@@ -327,9 +332,116 @@ function updatePrice(){
   let total=0; const paid=Math.min(qty,27); for(let i=0;i<paid;i++) total+=priceFor(2+i);
   el.textContent=total.toFixed(4)+' BNB';
 }
+/* ── wallet + mint (MetaMask / Binance Wallet, BSC chain 56) ── */
+const SEL_MINTFREE='0x8ab53447', SEL_MINTPAID='0x26c7f77c', SEL_QUOTE='0xfba2a03e';
+const MINT_ERRORS={'0x0d9ab13f':'notAgent','0x589ed34b':'mintClosed','0x52df9fe5':'soldOut','0xb92612ed':'overLimit','0x949ce241':'underpaid','0x775c0fe5':'freeClaimed'};
+const STATUS={
+ zh:{connecting:'正在连接钱包…',noWallet:'未检测到钱包，请安装 MetaMask 或币安钱包后重试。',switching:'正在切换到 BNB Chain…',sign:'请在钱包中确认交易…',pending:'交易已发送，等待确认…',success:'铸造成功！',failed:'铸造失败，请重试。',rejected:'已取消签名。',errNotAgent:'需要 Agent ID 才能铸造。',errMintClosed:'铸造尚未开始。',errSoldOut:'已售罄。',errOverLimit:'超过每钱包上限（28 个）。',errUnderpaid:'支付金额不足。',errFreeClaimed:'免费铸造已领取。',viewTx:'查看交易'},
+ ja:{connecting:'ウォレットに接続中…',noWallet:'ウォレットが見つかりません。MetaMaskまたはBinance Walletをインストールしてください。',switching:'BNB Chainに切り替え中…',sign:'ウォレットで取引を確認してください…',pending:'取引を送信しました。確認を待っています…',success:'ミント成功！',failed:'ミントに失敗しました。もう一度お試しください。',rejected:'署名がキャンセルされました。',errNotAgent:'ミントにはAgent IDが必要です。',errMintClosed:'ミントはまだ始まっていません。',errSoldOut:'売り切れました。',errOverLimit:'ウォレット上限（28個）を超えています。',errUnderpaid:'支払い金額が不足しています。',errFreeClaimed:'無料ミントはすでに受け取り済みです。',viewTx:'取引を見る'},
+ en:{connecting:'Connecting wallet…',noWallet:'No wallet detected. Please install MetaMask or Binance Wallet and try again.',switching:'Switching to BNB Chain…',sign:'Please confirm the transaction in your wallet…',pending:'Transaction sent, waiting for confirmation…',success:'Mint successful!',failed:'Mint failed. Please try again.',rejected:'Signature cancelled.',errNotAgent:'An Agent ID is required to mint.',errMintClosed:'Mint has not opened yet.',errSoldOut:'Sold out.',errOverLimit:'Over the per-wallet limit (28).',errUnderpaid:'Payment amount too low.',errFreeClaimed:'Free mint already claimed.',viewTx:'View tx'}
+};
+let account=null, busy=false;
+function T(){return STATUS[lang]||STATUS.en;}
+function setStatus(html, cls){const el=document.getElementById('mintStatus'); if(!el) return; el.innerHTML=html||''; el.className='mint-status'+(cls?' '+cls:'');}
+function provider(){return window.ethereum||null;}
+function padUint(n){return n.toString(16).padStart(64,'0');}
+function padAddr(a){return '000000000000000000000000'+a.replace(/^0x/,'').toLowerCase();}
+function ensureChain(p){
+  return p.request({method:'eth_chainId'}).then(function(id){
+    if(id==='0x38') return;
+    setStatus(T().switching,'');
+    return p.request({method:'wallet_switchEthereumChain',params:[{chainId:'0x38'}]}).catch(function(e){
+      if(e&&e.code===4902){
+        return p.request({method:'wallet_addEthereumChain',params:[{chainId:'0x38',chainName:'BNB Smart Chain',nativeCurrency:{name:'BNB',symbol:'BNB',decimals:18},rpcUrls:['https://bsc-dataseed.binance.org/'],blockExplorerUrls:['https://bscscan.com']}]});
+      }
+      throw e;
+    });
+  });
+}
+function connect(){
+  var p=provider();
+  if(!p){setStatus(T().noWallet,'err');return Promise.resolve();}
+  busy=true; setStatus(T().connecting,'');
+  return ensureChain(p).then(function(){return p.request({method:'eth_requestAccounts'});}).then(function(accs){
+    account=(accs&&accs[0])?accs[0]:null; busy=false; setStatus('','');
+  }).catch(function(e){
+    busy=false; setStatus(e&&e.code===4001?T().rejected:T().failed,'err');
+  });
+}
+function bindProviderEvents(){
+  var p=provider();
+  if(!p||!p.on||bindProviderEvents.done) return;
+  bindProviderEvents.done=true;
+  p.on('accountsChanged',function(accs){account=(accs&&accs[0])?accs[0]:null;});
+  p.on('chainChanged',function(){refreshChain();});
+}
+function rpcCall(method, params){
+  return fetch('https://bsc-dataseed1.bnbchain.org/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:method,params:params})}).then(function(r){return r.json();}).then(function(j){return j&&j.result?j.result:null;});
+}
+function waitReceipt(hash){
+  return rpcCall('eth_getTransactionReceipt',[hash]).catch(function(){return null;}).then(function(rec){
+    if(!rec) return new Promise(function(res){setTimeout(res,3000);}).then(function(){return waitReceipt(hash);});
+    return rec;
+  });
+}
+function errorText(e){
+  var blob='';
+  try{blob=JSON.stringify(e||{});}catch(_){}
+  blob+=' '+(e&&e.message?e.message:'')+' '+(e&&e.data?e.data:'');
+  for(var sel in MINT_ERRORS){
+    if(blob.indexOf(sel)!==-1){
+      var k=MINT_ERRORS[sel];
+      return {notAgent:T().errNotAgent,mintClosed:T().errMintClosed,soldOut:T().errSoldOut,overLimit:T().errOverLimit,underpaid:T().errUnderpaid,freeClaimed:T().errFreeClaimed}[k];
+    }
+  }
+  if(e&&e.code===4001) return T().rejected;
+  return T().failed;
+}
+function jsPriceWei(){
+  var total=0; var paid=Math.min(qty,27); for(var i=0;i<paid;i++) total+=priceFor(2+i);
+  return BigInt(Math.round(total*1e18));
+}
+function quotePrice(){
+  var p=provider();
+  var data=SEL_QUOTE+padAddr(account)+padUint(qty);
+  return p.request({method:'eth_call',params:[{from:account,to:NFT_ADDR,data:data},'latest']}).then(function(res){
+    if(!res||res==='0x') throw new Error('quote empty');
+    return BigInt(res);
+  }).catch(function(){ return jsPriceWei(); });
+}
+function sendMint(data, value){
+  var p=provider();
+  if(!p){setStatus(T().noWallet,'err');return;}
+  if(!account){connect().then(function(){if(account) sendMint(data,value);});return;}
+  busy=true; setStatus(T().sign,'');
+  ensureChain(p).then(function(){
+    return p.request({method:'eth_sendTransaction',params:[{from:account,to:NFT_ADDR,data:data,value:'0x'+value.toString(16)}]});
+  }).then(function(hash){
+    setStatus(T().pending+' <a href="https://bscscan.com/tx/'+hash+'" target="_blank" rel="noopener">'+T().viewTx+'</a>','');
+    return waitReceipt(hash).then(function(rec){
+      busy=false;
+      if(rec&&rec.status==='0x1'){ setStatus(T().success+' <a href="https://bscscan.com/tx/'+hash+'" target="_blank" rel="noopener">'+T().viewTx+'</a>','ok'); }
+      else setStatus(T().failed,'err');
+      refreshChain();
+    });
+  }).catch(function(e){
+    busy=false; setStatus(errorText(e),'err'); refreshChain();
+  });
+}
 async function doMint(){
   if(!mintOpen){alert(lang==='zh'?'铸造尚未开始，敬请期待！':lang==='ja'?'ミントはまだ始まっていません。お楽しみに！':'Mint has not opened yet. Stay tuned!');return;}
+  if(busy) return;
+  if(mode==='free'){ sendMint(SEL_MINTFREE, 0n); return; }
+  var p=provider();
+  if(!p){setStatus(T().noWallet,'err');return;}
+  if(!account){ await connect(); if(!account) return; }
+  busy=true; setStatus(T().sign,'');
+  var value;
+  try{ value=await quotePrice(); }catch(e){ value=jsPriceWei(); }
+  busy=false;
+  sendMint(SEL_MINTPAID+padUint(qty), value);
 }
+bindProviderEvents();
 window.addEventListener('scroll',()=>{
   const m=document.getElementById('mint').getBoundingClientRect();
   document.getElementById('floatMint').classList.toggle('show', m.top>window.innerHeight || m.bottom<0);
