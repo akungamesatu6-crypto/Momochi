@@ -290,7 +290,7 @@ function setMode(m){
 }
 function chgQty(d){
   if(mode==='free'){qty=1;document.getElementById('qtyNum').textContent=qty;updatePrice();return;}
-  qty=Math.min(10,Math.max(1,qty+d));
+  qty=Math.min(28,Math.max(1,qty+d));
   document.getElementById('qtyNum').textContent=qty; updatePrice();
 }
 function priceFor(n){ // paid mint number n (2..28) -> BNB
@@ -299,7 +299,7 @@ function priceFor(n){ // paid mint number n (2..28) -> BNB
 function updatePrice(){
   const el=document.getElementById('totalPrice');
   if(mode==='free'){el.textContent=I18N[lang].freeLabel;return;}
-  let total=0; for(let i=0;i<qty;i++) total+=priceFor(2+i);
+  let total=0; const paid=Math.min(qty,27); for(let i=0;i<paid;i++) total+=priceFor(2+i);
   el.textContent=total.toFixed(4)+' BNB';
 }
 async function doMint(){
