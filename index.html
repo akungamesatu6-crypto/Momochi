@@ -130,6 +130,39 @@ footer .x a{display:inline-block;background:#000;color:#fff;font-weight:700;padd
 .puzzle .pc.r2c0{background-position:0% 100%}.puzzle .pc.r2c1{background-position:50% 100%}.puzzle .pc.r2c2{background-position:100% 100%}
 .puzzle-note{font-size:13px;color:var(--ink2);margin-top:10px;text-align:center}
 .puzzle-note b{color:var(--ink)}
+/* rarity */
+.stackbar{display:flex;height:18px;border-radius:999px;overflow:hidden;margin:14px 0 10px}
+.stackbar div{height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;font-size:12px;color:var(--ink2);margin-bottom:12px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px}
+.table-scroll{overflow-x:auto}
+.rarity-table{width:100%;border-collapse:collapse;font-size:13px;min-width:480px}
+.rarity-table th{background:#f9f3ff;padding:8px;font-size:12px;color:var(--ink2);text-align:left}
+.rarity-table td{padding:8px;border-top:1px solid #f3e9f7}
+.rarity-table tr td:first-child{font-weight:700}
+.rar-note{font-size:12px;color:var(--ink2);text-align:center;margin-top:10px}
+/* marketplace */
+.mkt-box{background:#fff;border:1px solid #f0e3f5;border-radius:22px;padding:20px;box-shadow:var(--shadow)}
+.mkt-box h3{font-size:17px;margin-bottom:4px}
+.mkt-box p{font-size:14px;color:var(--ink2)}
+.mkt-box ul{margin:12px 0 12px 18px;font-size:14px;color:var(--ink2)}
+.mkt-box ul li{margin-bottom:4px}
+.mkt-box code{font-size:12px;word-break:break-all}
+.mkt-status{font-size:13px;margin-top:12px;padding-top:12px;border-top:1px dashed #f0e3f5}
+/* faq */
+.faq-list{display:flex;flex-direction:column;gap:10px}
+.faq-item{background:#fff;border:1px solid #f0e3f5;border-radius:16px;padding:14px 16px;box-shadow:var(--shadow)}
+.faq-item summary{font-weight:800;font-size:14px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:10px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary .chev{color:var(--pink)}
+.faq-a{font-size:13px;color:var(--ink2);margin-top:8px}
+/* agent id checker + wallet line */
+.wallet-line{font-size:12px;color:var(--ink2);margin-top:8px;min-height:16px}
+.wallet-line b{color:#1a7f37}
+.check-box{margin-top:16px;padding-top:14px;border-top:1px dashed #e6d5f2;text-align:left}
+.check-row{display:flex;gap:8px;margin-top:10px}
+.check-row input{flex:1;min-width:0;border:1px solid #e6d9ff;border-radius:12px;padding:11px 12px;font-size:13px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.check-row button{background:#f6f0ff;border:1px solid #e6d9ff;border-radius:12px;padding:11px 16px;font-weight:800;font-size:13px;color:var(--ink)}
 @media(min-width:640px){.gallery{grid-template-columns:repeat(3,1fr)}.hero h1{font-size:38px}}
 @media(max-width:400px){.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.stat{min-width:0;padding:10px 8px}.wallet-row{flex-direction:column}.wallet-row button{padding:12px}.details .row code{font-size:11px}.logo{font-size:16px}.logo small{font-size:9px}.mint-btn-top{padding:9px 14px;font-size:13px}.hero h1{font-size:26px}.card .cap b{font-size:12px}.card .cap span{font-size:10px}}
 </style>
@@ -155,6 +188,9 @@ footer .x a{display:inline-block;background:#000;color:#fff;font-weight:700;padd
   <a href="#special" data-lkey="navSpecial">特别奖励 / 特別報酬 / Special Reward</a>
   <a href="#mint" data-lkey="navMint">铸造 / ミント / Mint</a>
   <a href="#token" data-lkey="navToken">代币 $MCHI / トークン / Token $MCHI</a>
+  <a href="#rarity" data-lkey="navRarity">稀有度 / レアリティ / Rarity</a>
+  <a href="#market" data-lkey="navMarket">市场 / マーケット / Marketplace</a>
+  <a href="#faq" data-lkey="navFaq">常见问题 / FAQ / FAQ</a>
   <h3 data-lkey="linksTitle">链接 / リンク / Links</h3>
   <a href="https://puzzlehave.fun/" target="_blank" rel="noopener">puzzlehave.fun</a>
   <a href="https://x.com/Edward_nfteth" target="_blank" rel="noopener">𝕏 @Edward_nfteth</a>
@@ -204,6 +240,22 @@ footer .x a{display:inline-block;background:#000;color:#fff;font-weight:700;padd
   <div class="gallery" id="gallery"></div>
 </section>
 
+<section id="rarity">
+  <h2 data-lkey="rarTitle">稀有度 · レアリティ · Rarity</h2>
+  <p class="lead" data-lkey="rarLead">2,222 块拼图分属 3 个稀有度——Dream 是最稀有的钥匙块。</p>
+  <div class="stackbar"><div style="width:92.9%;background:var(--pink)"></div><div style="width:6.7%;background:var(--purple)"></div><div style="width:0.4%;background:var(--gold)"></div></div>
+  <div class="legend">
+    <span><i style="background:var(--pink)"></i><span data-lkey="rarCommon">普通 Common · 2,072 (92.9%)</span></span>
+    <span><i style="background:var(--purple)"></i><span data-lkey="rarRare">稀有 Rare · Dream 150 (6.7%)</span></span>
+    <span><i style="background:var(--gold)"></i><span data-lkey="rarLegendary">传说 Legendary · 特别版 9 (0.4%)</span></span>
+  </div>
+  <div class="table-scroll"><table class="rarity-table">
+    <thead><tr><th data-lkey="rarThPiece">拼图</th><th data-lkey="rarThIds">编号</th><th data-lkey="rarThCount">数量</th><th data-lkey="rarThRarity">稀有度</th><th data-lkey="rarThMchi">$MCHI</th></tr></thead>
+    <tbody id="rarityBody"></tbody>
+  </table></div>
+  <p class="rar-note" data-lkey="rarNote">* 27,000 $MCHI 是烧掉一套兑换特别版的奖励，不是每次铸造的奖励。</p>
+</section>
+
 <section id="special">
   <div class="special">
     <span class="only" data-lkey="specialOnly">仅 9 个 · 全世界 / 世界に9つだけ / Only 9 in the world</span>
@@ -217,6 +269,7 @@ footer .x a{display:inline-block;background:#000;color:#fff;font-weight:700;padd
 <section id="mint">
   <div class="mint-box">
     <span class="soon" id="mintState" data-lkey="mintSoon">铸造即将开始 · まもなく開始 / Mint opens soon</span>
+    <p class="wallet-line" id="walletLine"></p>
     <h2 style="margin-bottom:2px" data-lkey="mintTitle">铸造 Momo Mochi</h2>
     <p style="color:var(--ink2);font-size:14px"><span data-lkey="mintedLabel">已铸造 / ミント済み / Minted</span>: <b id="mintedCount">0</b> / 2,222</p>
     <table class="price-table">
@@ -242,6 +295,15 @@ footer .x a{display:inline-block;background:#000;color:#fff;font-weight:700;padd
       <button type="button" class="agent-btn" id="copyPromptBtn" data-lkey="copyPrompt">🤖 复制提示词</button>
       <p class="agent-note" data-lkey="agentNote">把这段提示词粘贴到 Binance Agentic Wallet，钱包会先模拟，确认后即可铸造。</p>
     </div>
+    <div class="check-box">
+      <p class="agent-title" data-lkey="checkTitle">🔍 检查 Agent ID</p>
+      <p class="agent-note" data-lkey="checkDesc">粘贴钱包地址，在链上检查是否持有 Agent ID（无需连接钱包）。</p>
+      <div class="check-row">
+        <input type="text" id="agentAddr" placeholder="0x…" autocomplete="off" spellcheck="false">
+        <button type="button" id="agentCheckBtn" data-lkey="checkBtn">检查</button>
+      </div>
+      <p class="mint-status" id="agentCheckOut"></p>
+    </div>
     <p class="mint-note" id="mintNote" data-lkey="mintNote">免费和付费铸造都需要 Agent ID。任何人都可以连接钱包浏览。Free and paid mints both need an Agent ID. Anyone can connect a wallet to browse.</p>
   </div>
 </section>
@@ -261,6 +323,22 @@ footer .x a{display:inline-block;background:#000;color:#fff;font-weight:700;padd
   </div>
 </section>
 
+<section id="market">
+  <h2 data-lkey="mktTitle">市场 · マーケット · Marketplace</h2>
+  <p class="lead" data-lkey="mktLead">在专属托管市场上交易你的拼图。</p>
+  <div class="mkt-box">
+    <h3 data-lkey="mktH3">交易你的拼图</h3>
+    <p data-lkey="mktP">市场随铸造同步开放——在专属托管市场上架、买卖拼图，从普通拼图到唯一的特别版都可以交易。</p>
+    <ul>
+      <li data-lkey="mktLi1">平台费 0%——卖家拿走全部售价（除版税外）</li>
+      <li data-lkey="mktLi2">每次转售版税 2% 归创作者</li>
+      <li data-lkey="mktLi3">上架 · 购买 · 取消——托管结算，无需互相信任</li>
+    </ul>
+    <p style="font-size:13px"><span data-lkey="mktContract">市场合约 · BSC</span>: <a href="https://bscscan.com/address/0x97E42f85CC6eFC06ce556782560Ff9230B4030B1" target="_blank" rel="noopener"><code>0x97E42f85CC6eFC06ce556782560Ff9230B4030B1</code></a></p>
+    <p class="mkt-status" data-lkey="mktStatus">暂无上架。市场随铸造开放——有人上架后，商品会出现在这里。</p>
+  </div>
+</section>
+
 <section>
   <h2 data-lkey="detailsTitle">合约与详情</h2>
   <p class="lead" data-lkey="detailsLead">链上透明，合约地址即将公布。</p>
@@ -272,6 +350,19 @@ footer .x a{display:inline-block;background:#000;color:#fff;font-weight:700;padd
     <div class="row"><span data-lkey="dNft">NFT 合约 / コントラクト / NFT contract</span><code id="nftAddr">—</code></div>
     <div class="row"><span data-lkey="dTok">代币合约 / トークン / Token contract</span><code id="tokAddr">—</code></div>
     <div class="row"><span data-lkey="dMarket">市场 / マーケット / Marketplace</span><code id="mktAddr">—</code></div>
+  </div>
+</section>
+
+<section id="faq">
+  <h2 data-lkey="faqTitle">常见问题 · よくある質問 · FAQ</h2>
+  <p class="lead" data-lkey="faqDesc">关于铸造、$MCHI 奖励和市场的常见问题。</p>
+  <div class="faq-list">
+    <details class="faq-item"><summary><span data-lkey="faqQ1">免费铸造有什么条件？</span><span class="chev">▾</span></summary><div class="faq-a" data-lkey="faqA1">需要 Agent ID，每钱包限 1 次。免费和付费抽取共用同一个牌库，所以免费也有机会抽到稀有的 Dream。</div></details>
+    <details class="faq-item"><summary><span data-lkey="faqQ2">付费铸造怎么收费？</span><span class="chev">▾</span></summary><div class="faq-a" data-lkey="faqA2">按阶梯价：#2–#10 每张 0.0003 BNB，#11–#19 每张 0.0006 BNB，#20–#28 每张 0.0009 BNB。每钱包最多 28 张（1 张免费 + 27 张付费），最多 0.0162 BNB。</div></details>
+    <details class="faq-item"><summary><span data-lkey="faqQ3">怎样集齐一套兑换特别版？</span><span class="chev">▾</span></summary><div class="faq-a" data-lkey="faqA3">每次铸造随机抽取 9 种拼图之一，不保证集齐——这正是挑战所在。在同一个钱包集齐 9 种不同拼图后，烧掉一整套即可铸造 1 个全新特别 NFT，全世界只有 9 个，先到先得。</div></details>
+    <details class="faq-item"><summary><span data-lkey="faqQ4">$MCHI 奖励怎么算？</span><span class="chev">▾</span></summary><div class="faq-a" data-lkey="faqA4">每次付费铸造按抽到的拼图奖励：普通拼图 3,000，Dream 12,000。烧掉一套换特别版再得 27,000。每钱包上限 120,000。免费铸造没有奖励。</div></details>
+    <details class="faq-item"><summary><span data-lkey="faqQ5">一个钱包最多能铸造多少？</span><span class="chev">▾</span></summary><div class="faq-a" data-lkey="faqA5">最多 28 张：免费 1 张 + 付费 27 张。单笔交易最多也可以一次铸造 28 张。</div></details>
+    <details class="faq-item"><summary><span data-lkey="faqQ6">市场什么时候开？</span><span class="chev">▾</span></summary><div class="faq-a" data-lkey="faqA6">铸造开始即开放。在专属托管市场上架、买卖拼图：平台费 0%，每次转售版税 2% 归创作者。</div></details>
   </div>
 </section>
 
@@ -299,9 +390,9 @@ const PIECES=[
  {id:9,name:{zh:'Dream · 梦想',ja:'Dream · 夢',en:'Dream'},img:'assets/9-dream.png',note:{zh:'最稀有的钥匙块',ja:'最もレアな鍵ピース',en:'Rarest key piece'},key:true}
 ];
 const I18N={
-zh:{tagline:'PUZZLE NFT',mintBtn:'Mint',langTitle:'语言 / 言語 / Language',navTitle:'导航 / ナビ / Navigate',navHow:'怎么玩 / 遊び方 / How it works',navPieces:'9 块拼图 / 9ピース / 9 Pieces',navSpecial:'特别奖励 / 特別報酬 / Special Reward',navMint:'铸造 / ミント / Mint',navToken:'代币 $MCHI / トークン / Token $MCHI',linksTitle:'链接 / リンク / Links',heroPill:'🧩 拼图 NFT · パズルNFT · Puzzle NFT',heroSub:'收集 9 块拼图，烧掉一整套，兑换 1 个全世界只有 9 个的特别 NFT。Collect 9 pieces, burn the set, claim 1 of only 9 special NFTs.',statSupply:'总供应 / 供給 / Supply',statPieces:'拼图块 / ピース / Pieces',statSpecial:'特别版 / 特別版 / Special',statMax:'每钱包 / 上限 / Max / wallet',puzzleTitle:'拼图进度 · パズル進捗 · Live Puzzle',puzzleLead:'铸造越多，拼图越完整。The more mints, the more complete the puzzle becomes.',puzzleNote:'已完成',mintedLabel2:'已铸造',howTitle:'怎么玩',howLead:'三步，集齐一套，兑换限定版。',step1t:'铸造拼图块',step1d:'每次铸造随机获得 9 种拼图块中的 1 种。第 1 次免费（Agent ID 专属），之后按阶梯价付费。',step2t:'集齐 9 种',step2d:'在同一个钱包里集齐 9 种不同的拼图块。重复的可以和朋友交换，也可以在市场上交易。',step3t:'烧掉一套，兑换特别版',step3d:'烧掉完整的 9 块拼图，铸造 1 个全新的秘密特别 NFT。全世界只有 9 个，先到先得。',piecesTitle:'9 块拼图',piecesLead:'每一块都是 Momo 的一个瞬间。Dream 是最稀有的钥匙块。',specialOnly:'仅 9 个 · 全世界 / 世界に9つだけ / Only 9 in the world',specialMysteryTitle:'??? — 神秘奖励',specialMysteryDesc:'这是一个秘密奖励。集齐 9 块拼图并烧掉一整套，才能揭开它的真面目。全世界只有 9 个。',mysteryTag:'??? · 秘密',specialTitle:'Completed Puzzle — 特别版',specialDesc:'烧掉一套 9 块拼图后铸造的全新 NFT。金色拼图环绕，彩虹加持。不是抽奖，不是空投——只有真正集齐的人才能拥有。',mintSoon:'铸造即将开始 · まもなく開始 / Mint opens soon',mintLive:'铸造进行中 · 開催中 / MINT LIVE',mintTitle:'铸造 Momo Mochi',mintedLabel:'已铸造 / ミント済み / Minted',thMint:'铸造 / ミント / Mint',thPrice:'价格 / 価格 / Price',freeLabel:'免费 · 無料 · FREE',modeFree:'免费铸造 · 無料 / Free (Agent ID)',modePaid:'付费铸造 · 有料 / Paid (Agent ID)',totalLabel:'总计 / 合計 / Total',mintBtnBig:'铸造 · ミントする / Mint',mintNote:'免费和付费铸造都需要 Agent ID。任何人都可以连接钱包浏览。Free and paid mints both need an Agent ID. Anyone can connect a wallet to browse.',agentTitle:'🤖 Binance Agentic Wallet — 复制提示词，粘贴到你的钱包',copyPrompt:'🤖 复制提示词',agentNote:'把这段提示词粘贴到 Binance Agentic Wallet，钱包会先模拟，确认后即可铸造。',copied:'已复制 ✓',copyFail:'复制失败 — 请手动选择文本',tokenTitle:'代币 $MCHI',tokenLead:'每次付费铸造都可获得 $MCHI 奖励。抽到 Dream 更多，烧掉一套换特别版最多。',tokSymbol:'代币 / シンボル / Symbol',tokSupply:'总供应 / 供給 / Total supply',tokBonus:'每次付费铸造奖励 / 報酬 / Bonus per paid mint',tokDream:'抽到 Dream / Dream / Dream piece',tokSpecial:'烧掉 9 块换特别版 / 特別版 / Burn 9 for special',tokMax:'每钱包上限 / 上限 / Max / wallet',tokPool:'奖励池 / プール / Bonus pool',tokTreasury:'金库 / トレジャリー / Treasury',detailsTitle:'合约与详情',detailsLead:'链上透明，合约已部署。',dChain:'链 / チェーン / Chain',dSupply:'供应 / 供給 / Supply',dMax:'每钱包上限 / 上限 / Max / wallet',dRoyalty:'版税 / ロイヤリティ / Royalty',dNft:'NFT 合约 / コントラクト / NFT contract',dTok:'代币合约 / トークン / Token contract',dMarket:'市场 / マーケット / Marketplace',footNote:'Momo Mochi — 一个爱胡萝卜、爱游戏、爱朋友的兔耳少女。A bunny girl who loves carrots, games, and friends.'},
-ja:{tagline:'パズルNFT',mintBtn:'ミント',langTitle:'言語',navTitle:'ナビ',navHow:'遊び方',navPieces:'9ピース',navSpecial:'特別報酬',navMint:'ミント',navToken:'トークン $MCHI',linksTitle:'リンク',heroPill:'🧩 パズルNFT',heroSub:'9ピースを集めて、セットをバーンして、世界に9つだけの特別NFTを手に入れよう。',statSupply:'供給',statPieces:'ピース',statSpecial:'特別版',statMax:'上限 / ウォレット',puzzleTitle:'パズル進捗',puzzleLead:'ミントが増えるほど、パズルが完成に近づきます。',puzzleNote:'完成',mintedLabel2:'ミント済み',howTitle:'遊び方',howLead:'3ステップでセットを完成させよう。',step1t:'ピースをミント',step1d:'ミントするたびに9種類のピースから1つランダムでもらえます。1回目は無料（Agent ID限定）、その後は段階価格です。',step2t:'9種類を集める',step2d:'同じウォレットで9種類すべてを集めましょう。重複は友達と交換したり、マーケットで取引できます。',step3t:'セットをバーンして特別版へ',step3d:'完成した9ピースをバーンすると、新しい秘密の特別NFTをミントできます。世界に9つだけ、先着順です。',piecesTitle:'9ピース',piecesLead:'それぞれがモモの瞬間。Dreamは最もレアな鍵ピースです。',specialOnly:'世界に9つだけ',specialMysteryTitle:'??? — 秘密の報酬',specialMysteryDesc:'これは秘密の報酬です。9ピースを集めてセットをバーンした人だけが、その正体を見ることができます。世界に9つだけ。',mysteryTag:'??? · 秘密',specialTitle:'Completed Puzzle — 特別版',specialDesc:'9ピースのセットをバーンして鋳造する新しいNFT。金色のパズルと虹に包まれています。抽選でもエアドロップでもありません——本当に集めた人だけが持てます。',mintSoon:'まもなく開始',mintLive:'ミント開催中',mintTitle:'モモモチをミント',mintedLabel:'ミント済み',thMint:'ミント',thPrice:'価格',freeLabel:'無料 · FREE',modeFree:'無料ミント (Agent ID)',modePaid:'有料ミント (Agent ID)',totalLabel:'合計',mintBtnBig:'ミントする',mintNote:'無料・有料ミントはどちらもAgent IDが必要です。誰でもウォレットを接続して見ることができます。',agentTitle:'🤖 Binance Agentic Wallet — プロンプトをコピーしてウォレットに貼り付け',copyPrompt:'🤖 プロンプトをコピー',agentNote:'このプロンプトをBinance Agentic Walletに貼り付けてください。まずシミュレーションが実行され、確認後にミントできます。',copied:'コピーしました ✓',copyFail:'コピーに失敗しました — テキストを手動で選択してください',tokenTitle:'トークン $MCHI',tokenLead:'有料ミントごとに $MCHI を獲得できます。Dreamを引くとさらに多く、セットをバーンして特別版にすると最大です。',tokSymbol:'シンボル',tokSupply:'総供給',tokBonus:'有料ミントごとの報酬',tokDream:'Dreamを引く',tokSpecial:'9枚バーンで特別版',tokMax:'上限 / ウォレット',tokPool:'ボーナスプール',tokTreasury:'トレジャリー',detailsTitle:'コントラクトと詳細',detailsLead:'オンチェーンで透明、コントラクトはデプロイ済みです。',dChain:'チェーン',dSupply:'供給',dMax:'上限 / ウォレット',dRoyalty:'ロイヤリティ',dNft:'NFTコントラクト',dTok:'トークンコントラクト',dMarket:'マーケットプレイス',footNote:'モモ・モチ — にんじん、ゲーム、友達が大好きなうさ耳少女。'},
-en:{tagline:'PUZZLE NFT',mintBtn:'Mint',langTitle:'Language',navTitle:'Navigate',navHow:'How it works',navPieces:'9 Pieces',navSpecial:'Special Reward',navMint:'Mint',navToken:'Token $MCHI',linksTitle:'Links',heroPill:'🧩 Puzzle NFT',heroSub:'Collect 9 puzzle pieces, burn the complete set, and claim 1 of only 9 special NFTs in the world.',statSupply:'Supply',statPieces:'Pieces',statSpecial:'Special',statMax:'Max / wallet',puzzleTitle:'Live Puzzle',puzzleLead:'The more mints, the more complete the puzzle becomes.',puzzleNote:'Completed',mintedLabel2:'Minted',howTitle:'How it works',howLead:'Three steps. Complete a set. Claim the limited edition.',step1t:'Mint a puzzle piece',step1d:'Every mint randomly gives you 1 of 9 puzzle pieces. The 1st is free (Agent ID only), then a ladder price applies.',step2t:'Collect all 9',step2d:'Collect all 9 different pieces in one wallet. Trade duplicates with friends or on the marketplace.',step3t:'Burn the set, claim the special',step3d:'Burn a complete 9-piece set to mint 1 brand-new secret special NFT. Only 9 exist in the world, first come first served.',piecesTitle:'9 Puzzle Pieces',piecesLead:'Each piece is a moment of Momo. Dream is the rarest key piece.',specialOnly:'Only 9 in the world',specialMysteryTitle:'??? — Mystery Reward',specialMysteryDesc:'This is a secret reward. Only those who collect all 9 pieces and burn the complete set will reveal what it is. Only 9 will ever exist.',mysteryTag:'??? · SECRET',specialTitle:'Completed Puzzle — Special Edition',specialDesc:'A brand-new NFT minted by burning a complete 9-piece set. Golden puzzle pieces, rainbow light. Not a raffle, not an airdrop — only those who truly complete the set can own it.',mintSoon:'Mint opens soon',mintLive:'MINT LIVE',mintTitle:'Mint Momo Mochi',mintedLabel:'Minted',thMint:'Mint',thPrice:'Price',freeLabel:'FREE',modeFree:'Free Mint (Agent ID)',modePaid:'Paid Mint (Agent ID)',totalLabel:'Total',mintBtnBig:'Mint',mintNote:'Free and paid mints both need an Agent ID. Anyone can connect a wallet to browse.',agentTitle:'🤖 Binance Agentic Wallet — copy the prompt, paste it in your wallet',copyPrompt:'🤖 Copy prompt',agentNote:'Paste this prompt into your Binance Agentic Wallet — it will simulate first, then you confirm to mint.',copied:'Copied ✓',copyFail:'Copy failed — select the text manually',tokenTitle:'Token $MCHI',tokenLead:'Every paid mint earns you $MCHI. Draw Dream for more, burn a set for the special to earn the most.',tokSymbol:'Symbol',tokSupply:'Total supply',tokBonus:'Bonus per paid mint',tokDream:'Dream piece',tokSpecial:'Burn 9 for special',tokMax:'Max / wallet',tokPool:'Bonus pool',tokTreasury:'Treasury',detailsTitle:'Contracts & Details',detailsLead:'Transparent on-chain. Contracts are deployed.',dChain:'Chain',dSupply:'Supply',dMax:'Max / wallet',dRoyalty:'Royalty',dNft:'NFT contract',dTok:'Token contract',dMarket:'Marketplace',footNote:'Momo Mochi — a bunny girl who loves carrots, games, and friends.'}
+zh:{tagline:'PUZZLE NFT',mintBtn:'Mint',langTitle:'语言 / 言語 / Language',navTitle:'导航 / ナビ / Navigate',navHow:'怎么玩 / 遊び方 / How it works',navPieces:'9 块拼图 / 9ピース / 9 Pieces',navSpecial:'特别奖励 / 特別報酬 / Special Reward',navMint:'铸造 / ミント / Mint',navToken:'代币 $MCHI / トークン / Token $MCHI',linksTitle:'链接 / リンク / Links',heroPill:'🧩 拼图 NFT · パズルNFT · Puzzle NFT',heroSub:'收集 9 块拼图，烧掉一整套，兑换 1 个全世界只有 9 个的特别 NFT。Collect 9 pieces, burn the set, claim 1 of only 9 special NFTs.',statSupply:'总供应 / 供給 / Supply',statPieces:'拼图块 / ピース / Pieces',statSpecial:'特别版 / 特別版 / Special',statMax:'每钱包 / 上限 / Max / wallet',puzzleTitle:'拼图进度 · パズル進捗 · Live Puzzle',puzzleLead:'铸造越多，拼图越完整。The more mints, the more complete the puzzle becomes.',puzzleNote:'已完成',mintedLabel2:'已铸造',howTitle:'怎么玩',howLead:'三步，集齐一套，兑换限定版。',step1t:'铸造拼图块',step1d:'每次铸造随机获得 9 种拼图块中的 1 种。第 1 次免费（Agent ID 专属），之后按阶梯价付费。',step2t:'集齐 9 种',step2d:'在同一个钱包里集齐 9 种不同的拼图块。重复的可以和朋友交换，也可以在市场上交易。',step3t:'烧掉一套，兑换特别版',step3d:'烧掉完整的 9 块拼图，铸造 1 个全新的秘密特别 NFT。全世界只有 9 个，先到先得。',piecesTitle:'9 块拼图',piecesLead:'每一块都是 Momo 的一个瞬间。Dream 是最稀有的钥匙块。',specialOnly:'仅 9 个 · 全世界 / 世界に9つだけ / Only 9 in the world',specialMysteryTitle:'??? — 神秘奖励',specialMysteryDesc:'这是一个秘密奖励。集齐 9 块拼图并烧掉一整套，才能揭开它的真面目。全世界只有 9 个。',mysteryTag:'??? · 秘密',specialTitle:'Completed Puzzle — 特别版',specialDesc:'烧掉一套 9 块拼图后铸造的全新 NFT。金色拼图环绕，彩虹加持。不是抽奖，不是空投——只有真正集齐的人才能拥有。',mintSoon:'铸造即将开始 · まもなく開始 / Mint opens soon',mintLive:'铸造进行中 · 開催中 / MINT LIVE',mintTitle:'铸造 Momo Mochi',mintedLabel:'已铸造 / ミント済み / Minted',thMint:'铸造 / ミント / Mint',thPrice:'价格 / 価格 / Price',freeLabel:'免费 · 無料 · FREE',modeFree:'免费铸造 · 無料 / Free (Agent ID)',modePaid:'付费铸造 · 有料 / Paid (Agent ID)',totalLabel:'总计 / 合計 / Total',mintBtnBig:'铸造 · ミントする / Mint',mintNote:'免费和付费铸造都需要 Agent ID。任何人都可以连接钱包浏览。Free and paid mints both need an Agent ID. Anyone can connect a wallet to browse.',agentTitle:'🤖 Binance Agentic Wallet — 复制提示词，粘贴到你的钱包',copyPrompt:'🤖 复制提示词',agentNote:'把这段提示词粘贴到 Binance Agentic Wallet，钱包会先模拟，确认后即可铸造。',copied:'已复制 ✓',copyFail:'复制失败 — 请手动选择文本',tokenTitle:'代币 $MCHI',tokenLead:'每次付费铸造都可获得 $MCHI 奖励。抽到 Dream 更多，烧掉一套换特别版最多。',tokSymbol:'代币 / シンボル / Symbol',tokSupply:'总供应 / 供給 / Total supply',tokBonus:'每次付费铸造奖励 / 報酬 / Bonus per paid mint',tokDream:'抽到 Dream / Dream / Dream piece',tokSpecial:'烧掉 9 块换特别版 / 特別版 / Burn 9 for special',tokMax:'每钱包上限 / 上限 / Max / wallet',tokPool:'奖励池 / プール / Bonus pool',tokTreasury:'金库 / トレジャリー / Treasury',detailsTitle:'合约与详情',detailsLead:'链上透明，合约已部署。',dChain:'链 / チェーン / Chain',dSupply:'供应 / 供給 / Supply',dMax:'每钱包上限 / 上限 / Max / wallet',dRoyalty:'版税 / ロイヤリティ / Royalty',dNft:'NFT 合约 / コントラクト / NFT contract',dTok:'代币合约 / トークン / Token contract',dMarket:'市场 / マーケット / Marketplace',footNote:'Momo Mochi — 一个爱胡萝卜、爱游戏、爱朋友的兔耳少女。A bunny girl who loves carrots, games, and friends.',navRarity:'稀有度 / レアリティ / Rarity',navMarket:'市场 / マーケット / Marketplace',navFaq:'常见问题 / FAQ / FAQ',rarTitle:'稀有度 · レアリティ · Rarity',rarLead:'2,222 块拼图分属 3 个稀有度——Dream 是最稀有的钥匙块。',rarCommon:'普通 Common · 2,072 (92.9%)',rarRare:'稀有 Rare · Dream 150 (6.7%)',rarLegendary:'传说 Legendary · 特别版 9 (0.4%)',rarThPiece:'拼图',rarThIds:'编号',rarThCount:'数量',rarThRarity:'稀有度',rarThMchi:'$MCHI',rarNote:'* 27,000 $MCHI 是烧掉一套兑换特别版的奖励，不是每次铸造的奖励。',mktTitle:'市场 · マーケット · Marketplace',mktLead:'在专属托管市场上交易你的拼图。',mktH3:'交易你的拼图',mktP:'市场随铸造同步开放——在专属托管市场上架、买卖拼图，从普通拼图到唯一的特别版都可以交易。',mktLi1:'平台费 0%——卖家拿走全部售价（除版税外）',mktLi2:'每次转售版税 2% 归创作者',mktLi3:'上架 · 购买 · 取消——托管结算，无需互相信任',mktContract:'市场合约 · BSC',mktStatus:'暂无上架。市场随铸造开放——有人上架后，商品会出现在这里。',faqTitle:'常见问题 · よくある質問 · FAQ',faqDesc:'关于铸造、$MCHI 奖励和市场的常见问题。',faqQ1:'免费铸造有什么条件？',faqA1:'需要 Agent ID，每钱包限 1 次。免费和付费抽取共用同一个牌库，所以免费也有机会抽到稀有的 Dream。',faqQ2:'付费铸造怎么收费？',faqA2:'按阶梯价：#2–#10 每张 0.0003 BNB，#11–#19 每张 0.0006 BNB，#20–#28 每张 0.0009 BNB。每钱包最多 28 张（1 张免费 + 27 张付费），最多 0.0162 BNB。',faqQ3:'怎样集齐一套兑换特别版？',faqA3:'每次铸造随机抽取 9 种拼图之一，不保证集齐——这正是挑战所在。在同一个钱包集齐 9 种不同拼图后，烧掉一整套即可铸造 1 个全新特别 NFT，全世界只有 9 个，先到先得。',faqQ4:'$MCHI 奖励怎么算？',faqA4:'每次付费铸造按抽到的拼图奖励：普通拼图 3,000，Dream 12,000。烧掉一套换特别版再得 27,000。每钱包上限 120,000。免费铸造没有奖励。',faqQ5:'一个钱包最多能铸造多少？',faqA5:'最多 28 张：免费 1 张 + 付费 27 张。单笔交易最多也可以一次铸造 28 张。',faqQ6:'市场什么时候开？',faqA6:'铸造开始即开放。在专属托管市场上架、买卖拼图：平台费 0%，每次转售版税 2% 归创作者。',checkTitle:'🔍 检查 Agent ID',checkDesc:'粘贴钱包地址，在链上检查是否持有 Agent ID（无需连接钱包）。',checkBtn:'检查',checkHas:'持有 Agent ID ✓ 可以铸造',checkNone:'未找到 Agent ID——该地址无法铸造',checkInvalid:'地址格式不正确',checkChecking:'检查中…',checkFail:'检查失败，请重试',walletOn:'已连接'},
+ja:{tagline:'パズルNFT',mintBtn:'ミント',langTitle:'言語',navTitle:'ナビ',navHow:'遊び方',navPieces:'9ピース',navSpecial:'特別報酬',navMint:'ミント',navToken:'トークン $MCHI',linksTitle:'リンク',heroPill:'🧩 パズルNFT',heroSub:'9ピースを集めて、セットをバーンして、世界に9つだけの特別NFTを手に入れよう。',statSupply:'供給',statPieces:'ピース',statSpecial:'特別版',statMax:'上限 / ウォレット',puzzleTitle:'パズル進捗',puzzleLead:'ミントが増えるほど、パズルが完成に近づきます。',puzzleNote:'完成',mintedLabel2:'ミント済み',howTitle:'遊び方',howLead:'3ステップでセットを完成させよう。',step1t:'ピースをミント',step1d:'ミントするたびに9種類のピースから1つランダムでもらえます。1回目は無料（Agent ID限定）、その後は段階価格です。',step2t:'9種類を集める',step2d:'同じウォレットで9種類すべてを集めましょう。重複は友達と交換したり、マーケットで取引できます。',step3t:'セットをバーンして特別版へ',step3d:'完成した9ピースをバーンすると、新しい秘密の特別NFTをミントできます。世界に9つだけ、先着順です。',piecesTitle:'9ピース',piecesLead:'それぞれがモモの瞬間。Dreamは最もレアな鍵ピースです。',specialOnly:'世界に9つだけ',specialMysteryTitle:'??? — 秘密の報酬',specialMysteryDesc:'これは秘密の報酬です。9ピースを集めてセットをバーンした人だけが、その正体を見ることができます。世界に9つだけ。',mysteryTag:'??? · 秘密',specialTitle:'Completed Puzzle — 特別版',specialDesc:'9ピースのセットをバーンして鋳造する新しいNFT。金色のパズルと虹に包まれています。抽選でもエアドロップでもありません——本当に集めた人だけが持てます。',mintSoon:'まもなく開始',mintLive:'ミント開催中',mintTitle:'モモモチをミント',mintedLabel:'ミント済み',thMint:'ミント',thPrice:'価格',freeLabel:'無料 · FREE',modeFree:'無料ミント (Agent ID)',modePaid:'有料ミント (Agent ID)',totalLabel:'合計',mintBtnBig:'ミントする',mintNote:'無料・有料ミントはどちらもAgent IDが必要です。誰でもウォレットを接続して見ることができます。',agentTitle:'🤖 Binance Agentic Wallet — プロンプトをコピーしてウォレットに貼り付け',copyPrompt:'🤖 プロンプトをコピー',agentNote:'このプロンプトをBinance Agentic Walletに貼り付けてください。まずシミュレーションが実行され、確認後にミントできます。',copied:'コピーしました ✓',copyFail:'コピーに失敗しました — テキストを手動で選択してください',tokenTitle:'トークン $MCHI',tokenLead:'有料ミントごとに $MCHI を獲得できます。Dreamを引くとさらに多く、セットをバーンして特別版にすると最大です。',tokSymbol:'シンボル',tokSupply:'総供給',tokBonus:'有料ミントごとの報酬',tokDream:'Dreamを引く',tokSpecial:'9枚バーンで特別版',tokMax:'上限 / ウォレット',tokPool:'ボーナスプール',tokTreasury:'トレジャリー',detailsTitle:'コントラクトと詳細',detailsLead:'オンチェーンで透明、コントラクトはデプロイ済みです。',dChain:'チェーン',dSupply:'供給',dMax:'上限 / ウォレット',dRoyalty:'ロイヤリティ',dNft:'NFTコントラクト',dTok:'トークンコントラクト',dMarket:'マーケットプレイス',footNote:'モモ・モチ — にんじん、ゲーム、友達が大好きなうさ耳少女。',navRarity:'レアリティ',navMarket:'マーケット',navFaq:'FAQ',rarTitle:'レアリティ',rarLead:'2,222ピースは3つのレアリティに分かれます——Dreamは最もレアな鍵ピースです。',rarCommon:'コモン · 2,072 (92.9%)',rarRare:'レア · Dream 150 (6.7%)',rarLegendary:'レジェンダリー · 特別版 9 (0.4%)',rarThPiece:'ピース',rarThIds:'ID',rarThCount:'数量',rarThRarity:'レアリティ',rarThMchi:'$MCHI',rarNote:'* 27,000 $MCHIはセットをバーンして特別版をもらう報酬で、ミントごとの報酬ではありません。',mktTitle:'マーケットプレイス',mktLead:'専用エスクローマーケットでピースを取引。',mktH3:'ピースを取引しよう',mktP:'マーケットはミント開始と同時にオープン——専用エスクローマーケットでピースを出品・売買できます。コモンから一点物の特別版まで取引可能です。',mktLi1:'手数料0%——売り手はロイヤリティを除く全額を受け取ります',mktLi2:'転売時のロイヤリティ2%がクリエイターに入ります',mktLi3:'出品・購入・キャンセル——エスクロー決済で信頼不要',mktContract:'マーケットコントラクト · BSC',mktStatus:'まだ出品はありません。マーケットはミントと同時にオープン——出品されるとここに表示されます。',faqTitle:'よくある質問',faqDesc:'ミント、$MCHIボーナス、マーケットについての質問をまとめました。',faqQ1:'無料ミントの条件は？',faqA1:'Agent ID保有者限定、1ウォレット1回まで。無料も有料も同じデッキから引くので、無料でもレアなDreamが当たる可能性があります。',faqQ2:'有料ミントの価格は？',faqA2:'段階価格です：#2–#10は0.0003 BNB、#11–#19は0.0006 BNB、#20–#28は0.0009 BNB。1ウォレット最大28枚（無料1枚＋有料27枚）、最大0.0162 BNBです。',faqQ3:'セットを完成させて特別版をもらうには？',faqA3:'ミントするたびに9種類から1枚ランダムで引けます。コンプリートは保証されません——それが挑戦です。同じウォレットで9種類すべて集めてセットをバーンすると、新しい特別NFTを1枚ミントできます。世界に9つだけ、先着順です。',faqQ4:'$MCHIボーナスは？',faqA4:'有料ミント1回ごとに、引いたピースに応じてボーナス：通常ピース3,000、Dream12,000。セットをバーンして特別版をもらうとさらに27,000。1ウォレット上限120,000。無料ミントにボーナスはありません。',faqQ5:'1ウォレットで何枚までミントできますか？',faqA5:'最大28枚：無料1枚＋有料27枚。1回のトランザクションでも28枚まで一度にミントできます。',faqQ6:'マーケットはいつ開きますか？',faqA6:'ミント開始と同時にオープンします。専用エスクローマーケットでピースを出品・売買できます：手数料0%、転売時のロイヤリティ2%がクリエイターに入ります。',checkTitle:'🔍 Agent IDをチェック',checkDesc:'ウォレットアドレスを貼り付けて、Agent IDを持っているかチェーン上で確認します（接続不要）。',checkBtn:'チェック',checkHas:'Agent IDを持っています ✓ ミントできます',checkNone:'Agent IDが見つかりません——このアドレスではミントできません',checkInvalid:'アドレスの形式が正しくありません',checkChecking:'確認中…',checkFail:'確認に失敗しました。もう一度お試しください',walletOn:'接続済み'},
+en:{tagline:'PUZZLE NFT',mintBtn:'Mint',langTitle:'Language',navTitle:'Navigate',navHow:'How it works',navPieces:'9 Pieces',navSpecial:'Special Reward',navMint:'Mint',navToken:'Token $MCHI',linksTitle:'Links',heroPill:'🧩 Puzzle NFT',heroSub:'Collect 9 puzzle pieces, burn the complete set, and claim 1 of only 9 special NFTs in the world.',statSupply:'Supply',statPieces:'Pieces',statSpecial:'Special',statMax:'Max / wallet',puzzleTitle:'Live Puzzle',puzzleLead:'The more mints, the more complete the puzzle becomes.',puzzleNote:'Completed',mintedLabel2:'Minted',howTitle:'How it works',howLead:'Three steps. Complete a set. Claim the limited edition.',step1t:'Mint a puzzle piece',step1d:'Every mint randomly gives you 1 of 9 puzzle pieces. The 1st is free (Agent ID only), then a ladder price applies.',step2t:'Collect all 9',step2d:'Collect all 9 different pieces in one wallet. Trade duplicates with friends or on the marketplace.',step3t:'Burn the set, claim the special',step3d:'Burn a complete 9-piece set to mint 1 brand-new secret special NFT. Only 9 exist in the world, first come first served.',piecesTitle:'9 Puzzle Pieces',piecesLead:'Each piece is a moment of Momo. Dream is the rarest key piece.',specialOnly:'Only 9 in the world',specialMysteryTitle:'??? — Mystery Reward',specialMysteryDesc:'This is a secret reward. Only those who collect all 9 pieces and burn the complete set will reveal what it is. Only 9 will ever exist.',mysteryTag:'??? · SECRET',specialTitle:'Completed Puzzle — Special Edition',specialDesc:'A brand-new NFT minted by burning a complete 9-piece set. Golden puzzle pieces, rainbow light. Not a raffle, not an airdrop — only those who truly complete the set can own it.',mintSoon:'Mint opens soon',mintLive:'MINT LIVE',mintTitle:'Mint Momo Mochi',mintedLabel:'Minted',thMint:'Mint',thPrice:'Price',freeLabel:'FREE',modeFree:'Free Mint (Agent ID)',modePaid:'Paid Mint (Agent ID)',totalLabel:'Total',mintBtnBig:'Mint',mintNote:'Free and paid mints both need an Agent ID. Anyone can connect a wallet to browse.',agentTitle:'🤖 Binance Agentic Wallet — copy the prompt, paste it in your wallet',copyPrompt:'🤖 Copy prompt',agentNote:'Paste this prompt into your Binance Agentic Wallet — it will simulate first, then you confirm to mint.',copied:'Copied ✓',copyFail:'Copy failed — select the text manually',tokenTitle:'Token $MCHI',tokenLead:'Every paid mint earns you $MCHI. Draw Dream for more, burn a set for the special to earn the most.',tokSymbol:'Symbol',tokSupply:'Total supply',tokBonus:'Bonus per paid mint',tokDream:'Dream piece',tokSpecial:'Burn 9 for special',tokMax:'Max / wallet',tokPool:'Bonus pool',tokTreasury:'Treasury',detailsTitle:'Contracts & Details',detailsLead:'Transparent on-chain. Contracts are deployed.',dChain:'Chain',dSupply:'Supply',dMax:'Max / wallet',dRoyalty:'Royalty',dNft:'NFT contract',dTok:'Token contract',dMarket:'Marketplace',footNote:'Momo Mochi — a bunny girl who loves carrots, games, and friends.',navRarity:'Rarity',navMarket:'Marketplace',navFaq:'FAQ',rarTitle:'Rarity',rarLead:'2,222 pieces across 3 rarities — Dream is the rarest key piece.',rarCommon:'Common · 2,072 (92.9%)',rarRare:'Rare · Dream 150 (6.7%)',rarLegendary:'Legendary · Special 9 (0.4%)',rarThPiece:'Piece',rarThIds:'IDs',rarThCount:'Count',rarThRarity:'Rarity',rarThMchi:'$MCHI',rarNote:'* 27,000 $MCHI is the reward for burning a complete set for the special, not a per-mint bonus.',mktTitle:'Marketplace',mktLead:'Trade your pieces on the collection’s own escrow marketplace.',mktH3:'Trade your pieces',mktP:'The marketplace opens with mint — list and trade pieces on the collection’s own escrow marketplace, from common pieces to the one-of-a-kind special.',mktLi1:'0% platform fee — the seller keeps the full price, minus royalty',mktLi2:'2% royalty to the creator on every resale',mktLi3:'List · Buy · Cancel — escrow settlement, no trust needed',mktContract:'Marketplace contract · BSC',mktStatus:'No listings yet. The marketplace opens with mint — listings appear here once owners list.',faqTitle:'FAQ',faqDesc:'Common questions about minting, the $MCHI bonus, and the marketplace.',faqQ1:'What are the conditions for the free mint?',faqA1:'Agent ID holders only, 1 per wallet. Free and paid draws share the same deck, so a free mint can also draw the rare Dream piece.',faqQ2:'How are paid mints priced?',faqA2:'Ladder pricing: #2–#10 at 0.0003 BNB, #11–#19 at 0.0006 BNB, #20–#28 at 0.0009 BNB. Max 28 per wallet (1 free + 27 paid), max 0.0162 BNB.',faqQ3:'How do I complete a set and claim the special?',faqA3:'Every mint randomly draws 1 of 9 pieces — a complete set is not guaranteed, that’s the challenge. Once you hold all 9 different pieces in one wallet, burn the set to mint 1 brand-new special NFT. Only 9 exist in the world, first come first served.',faqQ4:'How does the $MCHI bonus work?',faqA4:'Each paid mint earns a bonus by the piece drawn: regular pieces 3,000, Dream 12,000. Burning a set for the special earns another 27,000. Max 120,000 per wallet. Free mints earn no bonus.',faqQ5:'How many can one wallet mint?',faqA5:'Max 28: 1 free + 27 paid. A single transaction can also mint up to 28 at once.',faqQ6:'When does the marketplace open?',faqA6:'It opens with mint. List and trade pieces on the collection’s own escrow marketplace: 0% platform fee, 2% royalty to the creator on every resale.',checkTitle:'🔍 Check Agent ID',checkDesc:'Paste a wallet address to check on-chain whether it holds an Agent ID (no wallet connection needed).',checkBtn:'Check',checkHas:'Holds an Agent ID ✓ Can mint',checkNone:'No Agent ID found — this address cannot mint',checkInvalid:'Invalid address format',checkChecking:'Checking…',checkFail:'Check failed, please try again',walletOn:'Connected'}
 };
 let lang='zh', mode='free', qty=1, minted=0, mintOpen=false;
 const NFT_ADDR='0xc46d7758517D44aAF15255a1bf2BC2F046145E70', TOKEN_ADDR='0x3Aec151E450091c73e18535a5cEab18EBBD1E797', MARKET_ADDR='0x97E42f85CC6eFC06ce556782560Ff9230B4030B1';
@@ -309,11 +400,29 @@ function renderGallery(){
   document.getElementById('gallery').innerHTML=PIECES.map(p=>
     `<div class="card${p.key?' key':''}"><img src="${p.img}" alt="${p.name[lang]}" loading="lazy"><div class="cap"><b>${p.name[lang]}</b><span>${p.note[lang]}</span></div></div>`).join('');
 }
+const RARITY_INFO=[
+ {ids:'1–259',count:259,rar:'Common',mchi:'3,000'},
+ {ids:'260–518',count:259,rar:'Common',mchi:'3,000'},
+ {ids:'519–777',count:259,rar:'Common',mchi:'3,000'},
+ {ids:'778–1036',count:259,rar:'Common',mchi:'3,000'},
+ {ids:'1037–1295',count:259,rar:'Common',mchi:'3,000'},
+ {ids:'1296–1554',count:259,rar:'Common',mchi:'3,000'},
+ {ids:'1555–1813',count:259,rar:'Common',mchi:'3,000'},
+ {ids:'1814–2072',count:259,rar:'Common',mchi:'3,000'},
+ {ids:'2073–2222',count:150,rar:'Rare',mchi:'12,000'}
+];
+function renderRarity(){
+  const tb=document.getElementById('rarityBody'); if(!tb) return;
+  const rn={Common:{zh:'普通',ja:'コモン',en:'Common'},Rare:{zh:'稀有',ja:'レア',en:'Rare'},Legendary:{zh:'传说',ja:'レジェンダリー',en:'Legendary'}};
+  let html=PIECES.map((p,i)=>{const r=RARITY_INFO[i];return '<tr><td>'+p.name[lang]+'</td><td>'+r.ids+'</td><td>'+r.count+'</td><td>'+rn[r.rar][lang]+'</td><td>'+r.mchi+'</td></tr>';}).join('');
+  html+='<tr><td>'+(I18N[lang].specialTitle||'Completed Puzzle')+'</td><td>2223–2231</td><td>9</td><td>'+rn.Legendary[lang]+'</td><td>27,000*</td></tr>';
+  tb.innerHTML=html;
+}
 function applyLang(l){
   lang=l; document.documentElement.lang=l==='zh'?'zh-CN':l;
   document.querySelectorAll('[data-lkey]').forEach(el=>{const k=el.getAttribute('data-lkey'); if(I18N[l]&&I18N[l][k]!==undefined) el.textContent=I18N[l][k];});
   document.querySelectorAll('.lang').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
-  renderGallery(); updatePrice(); updateMintState();
+  renderGallery(); renderRarity(); updatePrice(); updateMintState(); updateWalletLine();
 }
 document.querySelectorAll('.lang').forEach(b=>b.addEventListener('click',()=>{applyLang(b.dataset.lang); closeDrawer();}));
 function openDrawer(){document.getElementById('drawer').classList.add('open');document.getElementById('overlay').classList.add('show');}
@@ -390,18 +499,34 @@ function connect(){
   if(!p){setStatus(T().noWallet,'err');return Promise.resolve();}
   busy=true; setStatus(T().connecting,'');
   return ensureChain(p).then(function(){return p.request({method:'eth_requestAccounts'});}).then(function(accs){
-    account=(accs&&accs[0])?accs[0]:null; busy=false; setStatus('','');
+    account=(accs&&accs[0])?accs[0]:null; busy=false; setStatus('',''); updateWalletLine();
   }).catch(function(e){
     busy=false; setStatus(e&&e.code===4001?T().rejected:T().failed,'err');
   });
 }
+function shortAddr(a){return a.slice(0,6)+'…'+a.slice(-4);}
+function updateWalletLine(){var el=document.getElementById('walletLine'); if(!el) return; el.innerHTML=account?('<b>●</b> '+(I18N[lang].walletOn||'Connected')+': '+shortAddr(account)):'';}
 function bindProviderEvents(){
   var p=provider();
   if(!p||!p.on||bindProviderEvents.done) return;
   bindProviderEvents.done=true;
-  p.on('accountsChanged',function(accs){account=(accs&&accs[0])?accs[0]:null;});
+  p.on('accountsChanged',function(accs){account=(accs&&accs[0])?accs[0]:null;updateWalletLine();});
   p.on('chainChanged',function(){refreshChain();});
 }
+const REGISTRY='0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F';
+function checkAgent(){
+  var addr=(document.getElementById('agentAddr').value||'').trim();
+  var out=document.getElementById('agentCheckOut');
+  if(!/^0x[0-9a-fA-F]{40}$/.test(addr)){out.className='mint-status err'; out.textContent=I18N[lang].checkInvalid||'Invalid address'; return;}
+  out.className='mint-status'; out.textContent=I18N[lang].checkChecking||'Checking…';
+  var data='0x70a08231'+'000000000000000000000000'+addr.slice(2).toLowerCase();
+  rpcCall('eth_call',[{to:REGISTRY,data:data},'latest']).then(function(bal){
+    var n=bal?parseInt(bal,16):0;
+    out.className='mint-status '+(n>0?'ok':'err');
+    out.textContent=n>0?(I18N[lang].checkHas||'Has Agent ID ✓'):(I18N[lang].checkNone||'No Agent ID found');
+  }).catch(function(){out.className='mint-status err'; out.textContent=I18N[lang].checkFail||'Check failed, try again';});
+}
+document.getElementById('agentCheckBtn').addEventListener('click',checkAgent);
 function rpcCall(method, params){
   return fetch('https://bsc-dataseed1.bnbchain.org/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method:method,params:params})}).then(function(r){return r.json();}).then(function(j){return j&&j.result?j.result:null;});
 }
@@ -515,7 +640,7 @@ async function checkSpecial(){
     }
   }catch(e){/* stay hidden */}
 }
-renderGallery(); applyLang('zh'); updatePrice(); checkSpecial(); refreshChain(); setInterval(refreshChain,30000);
+renderGallery(); renderRarity(); applyLang('zh'); updatePrice(); checkSpecial(); refreshChain(); setInterval(refreshChain,30000);
 document.getElementById('nftAddr').textContent=NFT_ADDR||'—';
 document.getElementById('tokAddr').textContent=TOKEN_ADDR||'—';
 document.getElementById('mktAddr').textContent=MARKET_ADDR||'—';
