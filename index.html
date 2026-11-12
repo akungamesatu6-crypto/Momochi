@@ -148,7 +148,7 @@ footer .x a{display:inline-block;background:#000;color:#fff;font-weight:700;padd
     <div class="stat"><b>2,222</b><span data-lkey="statSupply">总供应 / 供給 / Supply</span></div>
     <div class="stat"><b>9</b><span data-lkey="statPieces">拼图块 / ピース / Pieces</span></div>
     <div class="stat"><b>9</b><span data-lkey="statSpecial">特别版 / 特別版 / Special</span></div>
-    <div class="stat"><b>27</b><span data-lkey="statMax">每钱包 / 上限 / Max / wallet</span></div>
+    <div class="stat"><b>28</b><span data-lkey="statMax">每钱包 / 上限 / Max / wallet</span></div>
   </div>
 </div>
 
@@ -189,8 +189,8 @@ footer .x a{display:inline-block;background:#000;color:#fff;font-weight:700;padd
       <tr><th data-lkey="thMint">铸造 / ミント / Mint</th><th data-lkey="thPrice">价格 / 価格 / Price</th></tr>
       <tr><td>#1</td><td class="free" data-lkey="freeLabel">免费 · 無料 · FREE</td></tr>
       <tr><td>#2 – #10</td><td>0.0003 BNB</td></tr>
-      <tr><td>#11 – #20</td><td>0.0006 BNB</td></tr>
-      <tr><td>#21 – #27</td><td>0.0009 BNB</td></tr>
+      <tr><td>#11 – #19</td><td>0.0006 BNB</td></tr>
+      <tr><td>#20 – #28</td><td>0.0009 BNB</td></tr>
     </table>
     <div class="wallet-row">
       <button id="btnFree" class="on" onclick="setMode('free')" data-lkey="modeFree">免费铸造 · 無料 / Free (Agent ID)</button>
@@ -224,7 +224,7 @@ footer .x a{display:inline-block;background:#000;color:#fff;font-weight:700;padd
   <div class="details">
     <div class="row"><span data-lkey="dChain">链 / チェーン / Chain</span><b>BNB Chain (BEP-721)</b></div>
     <div class="row"><span data-lkey="dSupply">供应 / 供給 / Supply</span><b>2,222 + 9 special</b></div>
-    <div class="row"><span data-lkey="dMax">每钱包上限 / 上限 / Max / wallet</span><b>1 free + 26 paid</b></div>
+    <div class="row"><span data-lkey="dMax">每钱包上限 / 上限 / Max / wallet</span><b>1 free + 27 paid</b></div>
     <div class="row"><span data-lkey="dRoyalty">版税 / ロイヤリティ / Royalty</span><b>5%</b></div>
     <div class="row"><span data-lkey="dNft">NFT 合约 / コントラクト / NFT contract</span><code id="nftAddr">—</code></div>
     <div class="row"><span data-lkey="dTok">代币合约 / トークン / Token contract</span><code id="tokAddr">—</code></div>
@@ -291,8 +291,8 @@ function chgQty(d){
   qty=Math.min(10,Math.max(1,qty+d));
   document.getElementById('qtyNum').textContent=qty; updatePrice();
 }
-function priceFor(n){ // paid mint number n (2..27) -> BNB
-  if(n<=10) return 0.0003; if(n<=20) return 0.0006; return 0.0009;
+function priceFor(n){ // paid mint number n (2..28) -> BNB
+  if(n<=10) return 0.0003; if(n<=19) return 0.0006; return 0.0009;
 }
 function updatePrice(){
   const el=document.getElementById('totalPrice');
