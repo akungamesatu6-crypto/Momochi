@@ -1,0 +1,8 @@
+{
+  "token": "0x3Aec151E450091c73e18535a5cEab18EBBD1E797",
+  "nft": "0xc46d7758517D44aAF15255a1bf2BC2F046145E70",
+  "market": "0x97E42f85CC6eFC06ce556782560Ff9230B4030B1",
+  "tokenGas": "886025",
+  "nftGas": "2748392",
+  "marketGas": "1045355"
+}
